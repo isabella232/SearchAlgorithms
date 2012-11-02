@@ -1,4 +1,4 @@
-﻿namespace SearchAlgorithm.DistanceMeasures
+﻿namespace SearchAlgorithm.Surveyors
 {
     public interface ISurveyor<T>
     {

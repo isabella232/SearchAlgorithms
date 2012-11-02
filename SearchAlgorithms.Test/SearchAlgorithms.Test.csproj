@@ -50,6 +50,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SearchStrategies\LevenshteinAutomataStringStrategyTest.cs" />
     <Compile Include="StringSurveyors\LevenshteinStringSurveyorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -57,9 +58,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SearchAlgorithm.DistanceMeasures\SearchAlgorithm.DistanceMeasures.csproj">
+    <ProjectReference Include="..\SearchAlgorithm.Surveyors\SearchAlgorithm.Surveyors.csproj">
       <Project>{4C86C163-A6A0-4E7A-9013-84BE5741EA63}</Project>
-      <Name>SearchAlgorithm.DistanceMeasures</Name>
+      <Name>SearchAlgorithm.Surveyors</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SearchAlgorithms\SearchStrategies.csproj">
+      <Project>{31291551-66CC-4927-8B70-0D318FFEBAEE}</Project>
+      <Name>SearchStrategies</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -1,6 +1,6 @@
 using System;
 
-namespace SearchAlgorithm.DistanceMeasures
+namespace SearchAlgorithm.Surveyors
 {
     public class Surveyor<T> : ISurveyor<T>
     {
