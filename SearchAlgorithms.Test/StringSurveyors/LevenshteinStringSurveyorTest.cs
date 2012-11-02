@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using SearchAlgorithm.DistanceMeasures;
+using SearchAlgorithm.DistanceMeasures.StringSurveyors;
 
 namespace SearchAlgorithms.Test.StringSurveyors
 {
