@@ -50,7 +50,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DistanceMeasures\LevenshteinDistanceBetweenStringsTest.cs" />
+    <Compile Include="StringSurveyors\LevenshteinStringSurveyorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

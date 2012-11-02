@@ -1,6 +1,6 @@
 using System;
 
-namespace SearchAlgorithm.DistanceMeasures
+namespace SearchAlgorithm.DistanceMeasures.StringSurveyors
 {
     /// <summary>
     /// Calculate the Levenshtein distance between two strings. This implementation

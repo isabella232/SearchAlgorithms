@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using SearchAlgorithm.DistanceMeasures;
 
-namespace SearchAlgorithms.Test.DistanceMeasures
+namespace SearchAlgorithms.Test.StringSurveyors
 {
     public class LevenshteinStringSurveyorTest
     {

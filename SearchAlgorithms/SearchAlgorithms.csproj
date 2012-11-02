@@ -40,8 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseSearchAlgorithm.cs" />
-    <Compile Include="IBaseSearchAlgorithm.cs" />
+    <Compile Include="BaseSearchStrategy.cs" />
+    <Compile Include="IBaseSearchStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -40,9 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LevenshteinDistanceBetweenStrings.cs" />
-    <Compile Include="DistanceMeasure.cs" />
-    <Compile Include="IDistanceMeasure.cs" />
+    <Compile Include="LevenshteinStringSurveyor.cs" />
+    <Compile Include="Surveyor.cs" />
+    <Compile Include="ISurveyor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
