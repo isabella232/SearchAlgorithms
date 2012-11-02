@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchAlgorithms", "SearchAlgorithms\SearchAlgorithms.csproj", "{31291551-66CC-4927-8B70-0D318FFEBAEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchAlgorithm.DistanceMeasures", "SearchAlgorithm.DistanceMeasures\SearchAlgorithm.DistanceMeasures.csproj", "{4C86C163-A6A0-4E7A-9013-84BE5741EA63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchAlgorithms.Test", "SearchAlgorithms.Test\SearchAlgorithms.Test.csproj", "{6B9B4389-1653-4EA0-84AD-F0D7649D504C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F4667F5B-89F0-4584-8EE2-11C8A0E4759B}"
+	ProjectSection(SolutionItems) = preProject
+		Local.testsettings = Local.testsettings
+		SearchAlgorithms.vsmdi = SearchAlgorithms.vsmdi
+		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{283349C7-8C16-48C2-A007-8C89C6B2CD82}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = SearchAlgorithms.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{31291551-66CC-4927-8B70-0D318FFEBAEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31291551-66CC-4927-8B70-0D318FFEBAEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31291551-66CC-4927-8B70-0D318FFEBAEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31291551-66CC-4927-8B70-0D318FFEBAEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C86C163-A6A0-4E7A-9013-84BE5741EA63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C86C163-A6A0-4E7A-9013-84BE5741EA63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C86C163-A6A0-4E7A-9013-84BE5741EA63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C86C163-A6A0-4E7A-9013-84BE5741EA63}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B9B4389-1653-4EA0-84AD-F0D7649D504C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B9B4389-1653-4EA0-84AD-F0D7649D504C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B9B4389-1653-4EA0-84AD-F0D7649D504C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B9B4389-1653-4EA0-84AD-F0D7649D504C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
