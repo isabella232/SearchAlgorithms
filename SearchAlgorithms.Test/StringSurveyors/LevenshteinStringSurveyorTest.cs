@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using SearchAlgorithm.DistanceMeasures;
 using SearchAlgorithm.DistanceMeasures.StringSurveyors;
 
 namespace SearchAlgorithms.Test.StringSurveyors
@@ -16,8 +15,8 @@ namespace SearchAlgorithms.Test.StringSurveyors
         [Test]
         public void EqualStringsShouldComputeZero()
         {
-            string root = "nice";
-            string leaf = "nice";
+            const string root = "nice";
+            const string leaf = "nice";
 
             int distance = _surveyor.CalculateDistance(root, leaf);
 
@@ -27,8 +26,8 @@ namespace SearchAlgorithms.Test.StringSurveyors
         [Test]
         public void StringsWithLastCharacterSubstitutedShouldComputeOne()
         {
-            string root = "nice";
-            string leaf = "nici";
+            const string root = "nice";
+            const string leaf = "nici";
 
             int distance = _surveyor.CalculateDistance(root, leaf);
 
@@ -38,8 +37,8 @@ namespace SearchAlgorithms.Test.StringSurveyors
         [Test]
         public void StringsWithFirstCharacterSubstituedShouldComputeOne()
         {
-            string root = "nice";
-            string leaf = "rice";
+            const string root = "nice";
+            const string leaf = "rice";
 
             int distance = _surveyor.CalculateDistance(root, leaf);
 
@@ -49,8 +48,8 @@ namespace SearchAlgorithms.Test.StringSurveyors
         [Test]
         public void StringsWithTwoCharacterAddedToFrontShouldComputeTwo()
         {
-            string root = "nice";
-            string leaf = "sonice";
+            const string root = "nice";
+            const string leaf = "sonice";
 
             int distance = _surveyor.CalculateDistance(root, leaf);
 
@@ -60,8 +59,8 @@ namespace SearchAlgorithms.Test.StringSurveyors
         [Test]
         public void StringsWithTwoCharacterAddedToEndShouldComputeTwo()
         {
-            string root = "nice";
-            string leaf = "niceso";
+            const string root = "nice";
+            const string leaf = "niceso";
 
             int distance = _surveyor.CalculateDistance(root, leaf);
 
@@ -71,8 +70,8 @@ namespace SearchAlgorithms.Test.StringSurveyors
         [Test]
         public void StringsWithTwoCharacterRemovedFromFrontShouldComputeTwo()
         {
-            string root = "applepie";
-            string leaf = "plepie";
+            const string root = "applepie";
+            const string leaf = "plepie";
 
             int distance = _surveyor.CalculateDistance(root, leaf);
 
@@ -82,8 +81,8 @@ namespace SearchAlgorithms.Test.StringSurveyors
         [Test]
         public void StringsWithTwoCharacterRemovedFromEndShouldComputeTwo()
         {
-            string root = "applepie";
-            string leaf = "applep";
+            const string root = "applepie";
+            const string leaf = "applep";
 
             int distance = _surveyor.CalculateDistance(root, leaf);
 
