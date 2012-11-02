@@ -2,7 +2,7 @@ using System;
 
 namespace SearchAlgorithm.DistanceMeasures
 {
-    public class DistanceMeasure<T> : IDistanceMeasure<T>
+    public class Surveyor<T> : ISurveyor<T>
     {
         public virtual int CalculateDistance(T root, T leaf)
         {

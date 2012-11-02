@@ -3,13 +3,13 @@ using SearchAlgorithm.DistanceMeasures;
 
 namespace SearchAlgorithms.Test.DistanceMeasures
 {
-    public class LevenshteinDistanceBetweenStringsTest
+    public class LevenshteinStringSurveyorTest
     {
-        private LevenshteinDistanceBetweenStrings _distance;
+        private LevenshteinStringSurveyor _surveyor;
         [SetUp]
         public void Initialize()
         {
-            _distance = new LevenshteinDistanceBetweenStrings();
+            _surveyor = new LevenshteinStringSurveyor();
         }
 
         [Test]
@@ -18,7 +18,7 @@ namespace SearchAlgorithms.Test.DistanceMeasures
             string root = "nice";
             string leaf = "nice";
 
-            int distance = _distance.CalculateDistance(root, leaf);
+            int distance = _surveyor.CalculateDistance(root, leaf);
 
             Assert.AreEqual(0, distance);
         }
@@ -29,7 +29,7 @@ namespace SearchAlgorithms.Test.DistanceMeasures
             string root = "nice";
             string leaf = "nici";
 
-            int distance = _distance.CalculateDistance(root, leaf);
+            int distance = _surveyor.CalculateDistance(root, leaf);
 
             Assert.AreEqual(1, distance);
         }
@@ -40,7 +40,7 @@ namespace SearchAlgorithms.Test.DistanceMeasures
             string root = "nice";
             string leaf = "rice";
 
-            int distance = _distance.CalculateDistance(root, leaf);
+            int distance = _surveyor.CalculateDistance(root, leaf);
 
             Assert.AreEqual(1, distance);
         }
@@ -51,7 +51,7 @@ namespace SearchAlgorithms.Test.DistanceMeasures
             string root = "nice";
             string leaf = "sonice";
 
-            int distance = _distance.CalculateDistance(root, leaf);
+            int distance = _surveyor.CalculateDistance(root, leaf);
 
             Assert.AreEqual(2, distance);
         }
@@ -62,7 +62,7 @@ namespace SearchAlgorithms.Test.DistanceMeasures
             string root = "nice";
             string leaf = "niceso";
 
-            int distance = _distance.CalculateDistance(root, leaf);
+            int distance = _surveyor.CalculateDistance(root, leaf);
 
             Assert.AreEqual(2, distance);
         }
@@ -73,7 +73,7 @@ namespace SearchAlgorithms.Test.DistanceMeasures
             string root = "applepie";
             string leaf = "plepie";
 
-            int distance = _distance.CalculateDistance(root, leaf);
+            int distance = _surveyor.CalculateDistance(root, leaf);
 
             Assert.AreEqual(2, distance);
         }
@@ -84,7 +84,7 @@ namespace SearchAlgorithms.Test.DistanceMeasures
             string root = "applepie";
             string leaf = "applep";
 
-            int distance = _distance.CalculateDistance(root, leaf);
+            int distance = _surveyor.CalculateDistance(root, leaf);
 
             Assert.AreEqual(2, distance);
         }

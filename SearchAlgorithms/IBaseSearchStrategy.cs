@@ -2,7 +2,7 @@
 
 namespace SearchAlgorithms
 {
-    public interface IBaseSearchAlgorithm<T>
+    public interface IBaseSearchStrategy<T>
     {
         IEnumerable<T> Search(T query, IEnumerable<T> dataset);
     }

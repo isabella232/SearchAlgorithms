@@ -9,7 +9,7 @@ namespace SearchAlgorithm.DistanceMeasures
     ///  More information about the algorithm can be found 
     /// http://en.wikipedia.org/wiki/Levenshtein_distance
     /// </summary>
-    public class LevenshteinDistanceBetweenStrings : DistanceMeasure<string>
+    public class LevenshteinStringSurveyor : Surveyor<string>
     {
         public override int CalculateDistance(string root, string leaf)
         {

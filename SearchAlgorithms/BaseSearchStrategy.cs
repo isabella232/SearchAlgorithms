@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace SearchAlgorithms
 {
-    public class BaseSearchAlgorithm<T> : IBaseSearchAlgorithm<T>
+    public class BaseSearchStrategy<T> : IBaseSearchStrategy<T>
     {
         public virtual IEnumerable<T> Search(T query, IEnumerable<T> dataset)
         {
