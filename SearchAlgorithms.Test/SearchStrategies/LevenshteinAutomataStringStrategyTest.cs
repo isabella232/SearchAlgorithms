@@ -8,7 +8,7 @@ namespace SearchAlgorithms.Test.SearchStrategies
 {
     public class LevenshteinAutomataStringStrategyTest
     {
-        private List<string> _dataset;
+        private IList<string> _dataset;
         private LevenshteinAutomataStringStrategy _strategy;
 
         [SetUp]
@@ -22,22 +22,35 @@ namespace SearchAlgorithms.Test.SearchStrategies
         [Test]
         public void ShouldReturnStringsThatAreEqual()
         {
-            IEnumerable<string> results = _strategy.Search("nice", _dataset, 0);
+            IEnumerable<string> results = _strategy.Search("nice", _dataset);
             Assert.AreEqual(1, results.Count());
+        }
+
+        [Test]
+        public void ShouldReturnStringsThatAreOnlyOffByAtMostOneCharacter()
+        {
+            IEnumerable<string> results = _strategy.Search("nice", _dataset, 1);
+            Assert.AreEqual(3, results.Count());
         }
 
         private void _SetupDataset()
         {
             _dataset = new List<string>
                 {
-                    "nice",
-                    "nici",
-                    "rice",
-                    "sonice",
-                    "niceso",
                     "applepie",
+                    "nice",
+                    "rice",
+                    "niceso",
                     "plepie",
-                    "applep"
+                    "applep",
+                    "genes",
+                    "beer",
+                    "nici",
+                    "wizened",
+                    "great",
+                    "bait",
+                    "sonice",
+                    "mate"
                 };
         }
     }
