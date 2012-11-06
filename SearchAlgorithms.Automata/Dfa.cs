@@ -102,7 +102,7 @@ namespace SearchAlgorithms.Automata
             foreach (char c in input)
             {
                 stack.Push(Tuple.Create(input.Substring(0, i), state, c));
-                state = FindNextState(state, c);
+                state = _FindNextState(state, c);
 
                 if (state == null)
                 {
@@ -116,7 +116,7 @@ namespace SearchAlgorithms.Automata
             if (aStateWasNotFound)
                 stack.Push(Tuple.Create(input.Substring(0, i+1), state, '\0'));
 
-            if (IsFinal(state))
+            if (_IsFinal(state))
                 return input;
 
             while (stack.Count > 0)
@@ -130,8 +130,8 @@ namespace SearchAlgorithms.Automata
                 if (x != '\0')
                 {
                     path += x;
-                    itemState = FindNextState(itemState, x);
-                    if (IsFinal(itemState))
+                    itemState = _FindNextState(itemState, x);
+                    if (_IsFinal(itemState))
                         return path;
                     stack.Push(Tuple.Create(path, itemState, '\u0001'));
                 }
@@ -140,7 +140,7 @@ namespace SearchAlgorithms.Automata
             return null;
         }
 
-        private AutomataState FindNextState(AutomataState src, char input)
+        private AutomataState _FindNextState(AutomataState src, char input)
         {
             AutomataState nextState;
             if(_transitions.ContainsKey(src))
@@ -159,7 +159,7 @@ namespace SearchAlgorithms.Automata
             return null;
         }
 
-        private bool IsFinal(AutomataState state)
+        private bool _IsFinal(AutomataState state)
         {
             return _finalStates.Contains(state);
         }

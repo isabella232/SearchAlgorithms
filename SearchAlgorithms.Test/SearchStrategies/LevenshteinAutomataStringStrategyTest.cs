@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
-using SearchAlgorithm.Surveyors.StringSurveyors;
 using SearchAlgorithms.StringStrategies;
 
 namespace SearchAlgorithms.Test.SearchStrategies
@@ -14,8 +13,7 @@ namespace SearchAlgorithms.Test.SearchStrategies
         [SetUp]
         public void Initialize()
         {
-            LevenshteinStringSurveyor surveyor = new LevenshteinStringSurveyor();
-            _strategy = new LevenshteinAutomataStringStrategy(surveyor);
+            _strategy = new LevenshteinAutomataStringStrategy();
             _SetupDataset();
         }
 

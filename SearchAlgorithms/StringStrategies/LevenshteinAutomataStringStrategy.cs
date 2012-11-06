@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using SearchAlgorithm.Surveyors;
 using SearchAlgorithms.Automata;
 
 namespace SearchAlgorithms.StringStrategies
@@ -12,13 +11,6 @@ namespace SearchAlgorithms.StringStrategies
     /// </summary>
     public class LevenshteinAutomataStringStrategy : BaseSearchStrategy<string>
     {
-        private readonly ISurveyor<string> _surveyor;
-
-        public LevenshteinAutomataStringStrategy(ISurveyor<string> surveyor)
-        {
-            _surveyor = surveyor;
-        }
-
         /// <summary>
         /// Search a given dataset for the given query 
         /// </summary>
@@ -61,31 +53,21 @@ namespace SearchAlgorithms.StringStrategies
             int imax = dataset.Count - 1;
             int imin = 0;
 
-            // continue searching while [imin,imax] is not empty
             while (imax >= imin)
             {
-                /* calculate the midpoint for roughly equal partition */
                 int imid = imin + ((imax - imin) / 2);
 
-                // determine which subarray to search
                 if (string.CompareOrdinal(dataset.GetByIndex(imid) as string, match) < 0)
-                    // change min index to search upper subarray
                     imin = imid + 1;
                 else if (string.CompareOrdinal(dataset.GetByIndex(imid) as string,match) > 0)
-                    // change max index to search lower subarray
                     imax = imid - 1;
                 else
-                    // key found at index imid
                     return dataset.GetByIndex(imid) as string;
             }
-
-            //if (_justUsed == dataset.GetByIndex(imin) as string)
-                //imin++;
 
             if (imin >= dataset.Count)
                 return null;
 
-            //_justUsed = dataset.GetByIndex(imin) as string;
             return dataset.GetByIndex(imin) as string;
         }
 
