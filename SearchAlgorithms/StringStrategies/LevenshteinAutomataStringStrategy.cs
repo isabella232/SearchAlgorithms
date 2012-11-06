@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using SearchAlgorithm.Surveyors;
 using SearchAlgorithms.Automata;
@@ -14,7 +13,6 @@ namespace SearchAlgorithms.StringStrategies
     public class LevenshteinAutomataStringStrategy : BaseSearchStrategy<string>
     {
         private readonly ISurveyor<string> _surveyor;
-        private string _justUsed = "";
 
         public LevenshteinAutomataStringStrategy(ISurveyor<string> surveyor)
         {
@@ -33,25 +31,21 @@ namespace SearchAlgorithms.StringStrategies
         public override IEnumerable<string> Search(string query, IList<string> dataset, int fuzziness = 0)
         {
             List<string> matches = new List<string>();
-            int i = 0;
             SortedList sortedDataSet = new SortedList(dataset.ToDictionary(str => str));
 
-            // construct levenshtein automata for query (Aw)
             Dfa levenshteinAutomata = _LevenshteinAutomata(query, fuzziness);
-            string next = "";
-            int index = 0;
             string match = levenshteinAutomata.FindNextValidString("\u0001");
 
             while (match != null)
             {
-                next = LookupFunc(match, sortedDataSet);
+                string next = LookupFunc(match, sortedDataSet);
                 if (next == null)
                     break;
 
                 if (next == match)
                 {
                     matches.Add(next);
-                    index = sortedDataSet.IndexOfKey(next);
+                    int index = sortedDataSet.IndexOfKey(next);
                     sortedDataSet.RemoveAt(index);
                     next = sortedDataSet.GetByIndex(index) as string;
                 }

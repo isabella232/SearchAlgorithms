@@ -19,7 +19,7 @@ namespace SearchAlgorithms.Automata
 
         public AutomataState StartState
         {
-            get { return Expand(new AutomataState(_startState)); }
+            get { return _Expand(new AutomataState(_startState)); }
         }
 
         public Dictionary<Tuple<int, int>, Dictionary<char, AutomataState>> Transitions
@@ -101,17 +101,17 @@ namespace SearchAlgorithms.Automata
             {
                 AutomataState state = frontier.Pop();
 
-                HashSet<char> inputs = GetInputs(state);
+                IEnumerable<char> inputs = _GetInputs(state);
                 foreach (char input in inputs)
                 {
                     if (input.Equals(Epsilon)) continue;
-                    AutomataState nextState = NextState(state, input);
+                    AutomataState nextState = _NextState(state, input);
 
                     if (!seen.Contains(nextState))
                     {
                         frontier.Push(nextState);
                         seen.Add(nextState);
-                        if (isFinal(nextState))
+                        if (_IsFinal(nextState))
                             dfa.AddFinalState(nextState);
                     }
 
@@ -131,7 +131,7 @@ namespace SearchAlgorithms.Automata
             return dfa;
         }
 
-        private AutomataState Expand(AutomataState states)
+        private AutomataState _Expand(AutomataState states)
         {
             List<Tuple<int, int>> frontier = new List<Tuple<int, int>>();
             frontier.AddRange(states.State);
@@ -147,7 +147,7 @@ namespace SearchAlgorithms.Automata
                     AutomataState innerSet;
                     if (set.TryGetValue(Epsilon, out innerSet))
                     {
-                        var newStates = innerSet.State.Except(states.State);
+                        IList<Tuple<int, int>> newStates = innerSet.State.Except(states.State).ToList();
                         frontier.AddRange(newStates);
                         foreach (var entry in newStates)
                             states.Add(entry);
@@ -158,12 +158,12 @@ namespace SearchAlgorithms.Automata
             return states;
         }
 
-        private bool isFinal(AutomataState states)
+        private bool _IsFinal(AutomataState states)
         {
             return _finalStates.State.Intersect(states.State).Any();
         }
 
-        private AutomataState NextState(AutomataState states, char input)
+        private AutomataState _NextState(AutomataState states, char input)
         {
             AutomataState deststates = new AutomataState();
             foreach (Tuple<int, int> state in states.State)
@@ -184,10 +184,10 @@ namespace SearchAlgorithms.Automata
                     deststates.Add(item);
             }
 
-            return Expand(deststates);
+            return _Expand(deststates);
         }
 
-        private HashSet<char> GetInputs(AutomataState states)
+        private IEnumerable<char> _GetInputs(AutomataState states)
         {
             HashSet<char> inputs = new HashSet<char>();
 

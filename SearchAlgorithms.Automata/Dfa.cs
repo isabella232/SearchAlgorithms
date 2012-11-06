@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace SearchAlgorithms.Automata
 {
@@ -188,13 +187,7 @@ namespace SearchAlgorithms.Automata
                 return '\0';
 
             //where would x go in the sorted list?
-            int j = 1;
-            foreach (char item in orderedSet)
-            {
-                if (x >= item)
-                    break;
-                j++;
-            }
+            int j = 1 + orderedSet.TakeWhile(item => x < item).Count();
 
             return orderedSet[j];
         }
