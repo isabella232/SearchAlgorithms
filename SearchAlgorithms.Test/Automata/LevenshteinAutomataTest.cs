@@ -14,21 +14,25 @@ namespace SearchAlgorithms.Test.Automata
         [SetUp]
         public void Initialize()
         {
-            _automata = new LevenshteinAutomata("food", 1);
+            _automata = new LevenshteinAutomata("nice", 1);
         }
 
         [Test]
         public void NfaIsCreatedWithNoError()
         {
             Nfa nfa = _automata.Construct();
+            string dotfile = nfa.WriteGraph();
             Assert.IsNotNull(nfa);
+            Assert.IsNotNull(dotfile);
         }
 
         [Test]
         public void DfaIsCreatedWithNoError()
         {
             Dfa dfa = _automata.Construct().ConstructDfaUsingPowerSet();
+            string dotfile = dfa.WriteGraph();
             Assert.IsNotNull(dfa);
+            Assert.IsNotNull(dotfile);
         }
 
         [Test]
@@ -37,8 +41,8 @@ namespace SearchAlgorithms.Test.Automata
             Dfa dfa = _automata.Construct().ConstructDfaUsingPowerSet();
             Assert.IsNotNull(dfa);
 
-            string next = dfa.FindNextValidString("foo");
-            Assert.AreEqual(next, "foo");
+            string next = dfa.FindNextValidString("gice");
+            Assert.AreEqual(next, "gice");
         }
     }
 }

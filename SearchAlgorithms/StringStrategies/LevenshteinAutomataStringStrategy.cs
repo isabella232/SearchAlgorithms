@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace SearchAlgorithms.StringStrategies
     public class LevenshteinAutomataStringStrategy : BaseSearchStrategy<string>
     {
         private readonly ISurveyor<string> _surveyor;
+        private string _justUsed = "";
 
         public LevenshteinAutomataStringStrategy(ISurveyor<string> surveyor)
         {
@@ -31,31 +33,69 @@ namespace SearchAlgorithms.StringStrategies
         public override IEnumerable<string> Search(string query, IList<string> dataset, int fuzziness = 0)
         {
             List<string> matches = new List<string>();
+            int i = 0;
+            SortedList sortedDataSet = new SortedList(dataset.ToDictionary(str => str));
+
             // construct levenshtein automata for query (Aw)
-            Dfa queryAutomata = _ConstructLevenshteinDfa(query, fuzziness);
-            string current = "\u0001";
+            Dfa levenshteinAutomata = _LevenshteinAutomata(query, fuzziness);
             string next = "";
             int index = 0;
+            string match = levenshteinAutomata.FindNextValidString("\u0001");
 
-            while (next != null)
+            while (match != null)
             {
-                next = queryAutomata.FindNextValidString(current);
+                next = LookupFunc(match, sortedDataSet);
+                if (next == null)
+                    break;
 
-                if (next == current && dataset.Contains(next))
+                if (next == match)
                 {
                     matches.Add(next);
-                    index = dataset.IndexOf(next);
-                    current = dataset[index + 1];
+                    index = sortedDataSet.IndexOfKey(next);
+                    sortedDataSet.RemoveAt(index);
+                    next = sortedDataSet.GetByIndex(index) as string;
                 }
 
-                else
-                    current = next;
+                match = levenshteinAutomata.FindNextValidString(next);
             }
 
             return matches;
         }
 
-        private Dfa _ConstructLevenshteinDfa(string query, int fuzziness)
+        private string LookupFunc(string match, SortedList dataset)
+        {
+            int imax = dataset.Count - 1;
+            int imin = 0;
+
+            // continue searching while [imin,imax] is not empty
+            while (imax >= imin)
+            {
+                /* calculate the midpoint for roughly equal partition */
+                int imid = imin + ((imax - imin) / 2);
+
+                // determine which subarray to search
+                if (string.CompareOrdinal(dataset.GetByIndex(imid) as string, match) < 0)
+                    // change min index to search upper subarray
+                    imin = imid + 1;
+                else if (string.CompareOrdinal(dataset.GetByIndex(imid) as string,match) > 0)
+                    // change max index to search lower subarray
+                    imax = imid - 1;
+                else
+                    // key found at index imid
+                    return dataset.GetByIndex(imid) as string;
+            }
+
+            //if (_justUsed == dataset.GetByIndex(imin) as string)
+                //imin++;
+
+            if (imin >= dataset.Count)
+                return null;
+
+            //_justUsed = dataset.GetByIndex(imin) as string;
+            return dataset.GetByIndex(imin) as string;
+        }
+
+        private Dfa _LevenshteinAutomata(string query, int fuzziness)
         {
             LevenshteinAutomata automata = new LevenshteinAutomata(query, fuzziness);
             return automata.Construct().ConstructDfaUsingPowerSet();

@@ -33,6 +33,11 @@ namespace SearchAlgorithms.Automata
                 _defaults.Add(src, dest);
         }
 
+        public bool HasDefaultTransition(AutomataState src, AutomataState dest)
+        {
+            return _defaults.ContainsKey(src) && _defaults[src].Equals(dest);
+        }
+
         public void AddTransition(AutomataState src, char input, AutomataState dest)
         {
             Dictionary<char, AutomataState> set;
@@ -49,6 +54,13 @@ namespace SearchAlgorithms.Automata
                 set = new Dictionary<char, AutomataState> {{input, dest}};
                 _transitions.Add(src, set);
             }
+        }
+
+        public bool HasTransition(AutomataState src, char input, AutomataState dest)
+        {
+            return _transitions.ContainsKey(src) &&
+                   _transitions[src].ContainsKey(input) &&
+                   _transitions[src][input].Equals(dest);
         }
 
         public string WriteGraph()
@@ -86,6 +98,7 @@ namespace SearchAlgorithms.Automata
             AutomataState state = _startState;
             Stack<Tuple<string, AutomataState, char>> stack = new Stack<Tuple<string, AutomataState, char>>();
             int i = 0;
+            bool aStateWasNotFound = false;
 
             foreach (char c in input)
             {
@@ -93,11 +106,16 @@ namespace SearchAlgorithms.Automata
                 state = FindNextState(state, c);
 
                 if (state == null)
+                {
+                    aStateWasNotFound = true;
                     break;
+                }
 
-                stack.Push(Tuple.Create(input.Substring(0, i+1), state, '\0'));
                 i++;
             }
+
+            if (aStateWasNotFound)
+                stack.Push(Tuple.Create(input.Substring(0, i+1), state, '\0'));
 
             if (IsFinal(state))
                 return input;
@@ -125,16 +143,19 @@ namespace SearchAlgorithms.Automata
 
         private AutomataState FindNextState(AutomataState src, char input)
         {
+            AutomataState nextState;
             if(_transitions.ContainsKey(src))
             {
-                Dictionary<char, AutomataState> set = _transitions[src];
-                AutomataState innerSet;
-                if (set.TryGetValue(input, out innerSet))
-                    return innerSet;
-                if (_defaults.TryGetValue(src, out innerSet))
-                    return innerSet;
+                Dictionary<char, AutomataState> stateTransitions = _transitions[src];
+                if (stateTransitions.TryGetValue(input, out nextState))
+                    return nextState;
+                if (_defaults.TryGetValue(src, out nextState))
+                    return nextState;
                 return null;
             }
+
+            if (_defaults.TryGetValue(src, out nextState))
+                return nextState;
 
             return null;
         }
@@ -159,23 +180,23 @@ namespace SearchAlgorithms.Automata
 
             List<char> orderedSet = set.Keys.OrderBy(y => y).ToList();
 
-            int j = 0;
-            foreach (var item in orderedSet)
+            if (orderedSet.Count == 0)
+                return '\0';
+            if (x < orderedSet[0])
+                return orderedSet[0];
+            if (x > orderedSet[orderedSet.Count - 1])
+                return '\0';
+
+            //where would x go in the sorted list?
+            int j = 1;
+            foreach (char item in orderedSet)
             {
                 if (x >= item)
-                {
-                    orderedSet.Insert(j, x);
                     break;
-                }
-
                 j++;
             }
 
-            if (j >= orderedSet.Count && orderedSet.Count > 0)
-                return orderedSet[orderedSet.Count - 1];
-            if (j < orderedSet.Count)
-                return orderedSet[j];
-            return '\0';
+            return orderedSet[j];
         }
     }
 }

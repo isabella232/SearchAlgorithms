@@ -93,32 +93,38 @@ namespace SearchAlgorithms.Automata
         public Dfa ConstructDfaUsingPowerSet()
         {
             Dfa dfa = new Dfa(StartState);
-            List<AutomataState> frontier = new List<AutomataState> {StartState};
-            List<AutomataState> seen = new List<AutomataState>();
+            Stack<AutomataState> frontier = new Stack<AutomataState>();
+            frontier.Push(StartState);
+            HashSet<AutomataState> seen = new HashSet<AutomataState>();
 
             while (frontier.Count > 0)
             {
-                AutomataState states = frontier[frontier.Count - 1];
-                frontier.RemoveAt(frontier.Count - 1);
+                AutomataState state = frontier.Pop();
 
-                HashSet<char> inputs = GetInputs(states);
+                HashSet<char> inputs = GetInputs(state);
                 foreach (char input in inputs)
                 {
                     if (input.Equals(Epsilon)) continue;
-                    AutomataState newStates = NextState(states, input);
+                    AutomataState nextState = NextState(state, input);
 
-                    if (!seen.Contains(newStates))
+                    if (!seen.Contains(nextState))
                     {
-                        frontier.Add(newStates);
-                        seen.Add(newStates);
-                        if (isFinal(newStates))
-                            dfa.AddFinalState(newStates);
+                        frontier.Push(nextState);
+                        seen.Add(nextState);
+                        if (isFinal(nextState))
+                            dfa.AddFinalState(nextState);
                     }
 
                     if (input == Any)
-                        dfa.SetDefaultTransition(states, newStates);
+                    {
+                        if (!dfa.HasTransition(state, input, nextState))
+                            dfa.SetDefaultTransition(state, nextState);
+                    }
                     else
-                        dfa.AddTransition(states, input, newStates);
+                    {
+                        if (!dfa.HasDefaultTransition(state, nextState))
+                            dfa.AddTransition(state, input, nextState);
+                    }
                 }
             }
 

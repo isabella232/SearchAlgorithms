@@ -33,6 +33,13 @@ namespace SearchAlgorithms.Test.SearchStrategies
             Assert.AreEqual(3, results.Count());
         }
 
+        [Test]
+        public void ShouldReturnStringsThatAreOnlyOffByAtMostTwoCharacters()
+        {
+            IEnumerable<string> results = _strategy.Search("nice", _dataset, 2);
+            Assert.AreEqual(5, results.Count());
+        }
+
         private void _SetupDataset()
         {
             _dataset = new List<string>
