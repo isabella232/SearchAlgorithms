@@ -53,11 +53,15 @@
     <Compile Include="Automata\LevenshteinAutomataTest.cs" />
     <Compile Include="Automata\NfaTest.cs" />
     <Compile Include="SearchStrategies\LevenshteinAutomataStringStrategyTest.cs" />
+    <Compile Include="SearchStrategies\SearchResult.cs" />
     <Compile Include="StringSurveyors\LevenshteinStringSurveyorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="results.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SearchAlgorithm.Surveyors\SearchAlgorithm.Surveyors.csproj">

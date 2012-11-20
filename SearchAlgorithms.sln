@@ -6,11 +6,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchAlgorithms.Test", "SearchAlgorithms.Test\SearchAlgorithms.Test.csproj", "{6B9B4389-1653-4EA0-84AD-F0D7649D504C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F4667F5B-89F0-4584-8EE2-11C8A0E4759B}"
-	ProjectSection(SolutionItems) = preProject
-		Local.testsettings = Local.testsettings
-		SearchAlgorithms.vsmdi = SearchAlgorithms.vsmdi
-		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{283349C7-8C16-48C2-A007-8C89C6B2CD82}"
 	ProjectSection(SolutionItems) = preProject

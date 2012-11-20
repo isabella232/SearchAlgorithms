@@ -22,8 +22,14 @@ namespace SearchAlgorithms.StringStrategies
         /// <returns>A list of items found in the dataset given the query</returns>
         public override IEnumerable<string> Search(string query, IList<string> dataset, int fuzziness = 0)
         {
+            // assumes a case-insensitive search
+            query = query.ToUpper();
             List<string> matches = new List<string>();
-            SortedList sortedDataSet = new SortedList(dataset.ToDictionary(str => str));
+            SortedList sortedDataSet = new SortedList(
+                dataset.Where(x => !string.IsNullOrWhiteSpace(x)).
+                Select(x => x.ToUpper().Trim()).
+                Distinct().
+                ToDictionary(str => str));
 
             Dfa levenshteinAutomata = _LevenshteinAutomata(query, fuzziness);
             string match = levenshteinAutomata.FindNextValidString("\u0001");
