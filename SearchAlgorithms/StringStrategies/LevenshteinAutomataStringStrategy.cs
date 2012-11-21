@@ -22,39 +22,30 @@ namespace SearchAlgorithms.StringStrategies
         /// <returns>A list of items found in the dataset given the query</returns>
         public override IEnumerable<string> Search(string query, IList<string> dataset, int fuzziness = 0)
         {
-            // assumes a case-insensitive search
-            query = query.ToUpper();
             List<string> matches = new List<string>();
-            SortedList sortedDataSet = new SortedList(
-                dataset.Where(x => !string.IsNullOrWhiteSpace(x)).
-                Select(x => x.ToUpper().Trim()).
-                Distinct().
-                ToDictionary(str => str));
 
             Dfa levenshteinAutomata = _LevenshteinAutomata(query, fuzziness);
             string match = levenshteinAutomata.FindNextValidString("\u0001");
 
             while (match != null)
             {
-                string next = LookupFunc(match, sortedDataSet);
+                string next = LookupFunc(match, dataset);
                 if (next == null)
                     break;
 
-                if (next == match)
-                {
+                int index = dataset.IndexOf(next);
+                dataset.RemoveAt(index);
+                if (next.Contains(match))
                     matches.Add(next);
-                    int index = sortedDataSet.IndexOfKey(next);
-                    sortedDataSet.RemoveAt(index);
-                    next = sortedDataSet.GetByIndex(index) as string;
-                }
 
+                next = dataset[index];
                 match = levenshteinAutomata.FindNextValidString(next);
             }
 
             return matches;
         }
 
-        private string LookupFunc(string match, SortedList dataset)
+        private string LookupFunc(string match, IList<string> dataset)
         {
             int imax = dataset.Count - 1;
             int imin = 0;
@@ -63,18 +54,18 @@ namespace SearchAlgorithms.StringStrategies
             {
                 int imid = imin + ((imax - imin) / 2);
 
-                if (string.CompareOrdinal(dataset.GetByIndex(imid) as string, match) < 0)
+                if (string.CompareOrdinal(dataset[imid], match) < 0)
                     imin = imid + 1;
-                else if (string.CompareOrdinal(dataset.GetByIndex(imid) as string,match) > 0)
+                else if (string.CompareOrdinal(dataset[imid],match) > 0)
                     imax = imid - 1;
                 else
-                    return dataset.GetByIndex(imid) as string;
+                    return dataset[imid];
             }
 
             if (imin >= dataset.Count)
                 return null;
 
-            return dataset.GetByIndex(imin) as string;
+            return dataset[imin];
         }
 
         private Dfa _LevenshteinAutomata(string query, int fuzziness)

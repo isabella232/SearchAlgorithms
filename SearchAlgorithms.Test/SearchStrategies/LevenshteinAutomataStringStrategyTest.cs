@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using NUnit.Framework;
@@ -11,6 +12,7 @@ namespace SearchAlgorithms.Test.SearchStrategies
         private IList<string> _dataset;
         private List<string> _largeDataset;
         private LevenshteinAutomataStringStrategy _strategy;
+        private SortedList _sortedDataSet;
 
         [SetUp]
         public void Initialize()
@@ -51,8 +53,10 @@ namespace SearchAlgorithms.Test.SearchStrategies
         [Test]
         public void ShouldReturnStringsFromLargeDatasetThatAreNotEqual()
         {
-            IEnumerable<string> results = _strategy.Search("Randy", _largeDataset, 1);
-            Assert.AreEqual(17, results.Count());
+            string[] dataset = new string[_sortedDataSet.Count];
+            _sortedDataSet.Values.CopyTo(dataset, 0);
+            IEnumerable<string> results = _strategy.Search("Randy".ToLower(), dataset.ToList(), 1);
+            Assert.AreEqual(10, results.Count());
         }
 
         private void _SetupDataset()
@@ -93,6 +97,14 @@ namespace SearchAlgorithms.Test.SearchStrategies
 
             _largeDataset.AddRange(searchResults.Where(x => !string.IsNullOrEmpty(x.Description)).Select(x => x.Description));
             _largeDataset.AddRange(searchResults.Where(x => !string.IsNullOrEmpty(x.Number)).Select(x => x.Number));
+            List<string> intermediateDataSet = new List<string>();
+            intermediateDataSet.AddRange(_largeDataset.SelectMany(x => x.Split(new[] {' '})));
+
+            _sortedDataSet = new SortedList(
+                intermediateDataSet.Where(x => !string.IsNullOrWhiteSpace(x)).
+                                    Select(x => x.ToLower().Replace(" ", "").Replace("'","").Trim()).
+                                    Distinct().
+                                    ToDictionary(str => str));
         }
     }
 }
