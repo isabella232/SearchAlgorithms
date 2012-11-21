@@ -3,18 +3,17 @@
   <metadata>
     <id>SearchAlgorithms.dll</id>
     <version>1.0.0</version>
-    <authors>jroes</authors>
-    <owners>jroes</owners>
-    <licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>
-    <projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>
-    <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>
+    <authors>Eric LaForce</authors>
+    <owners>Skookum Digital Works</owners>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>https://github.com/Skookum/SearchAlgorithms</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Package description</description>
-    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <description>Project that defines a .NET search algorithms module</description>
+    <releaseNotes>Project that defines a .NET search algorithms module. It currently supports the following:
+
+String search through large dictionaries using Levenshtein Automata
+The project will generate a Nuget package that can be downloaded as a 3rd party dll via Visual Studio.</releaseNotes>
     <copyright>Copyright 2012</copyright>
-    <tags>Tag1 Tag2</tags>
-    <dependencies>
-      <dependency id="SampleDependency" version="1.0" />
-    </dependencies>
+    <tags>Automata, Search</tags>
   </metadata>
 </package>
