@@ -15,6 +15,8 @@ String search through large dictionaries using Levenshtein Automata
 The project will generate a Nuget package that can be downloaded as a 3rd party dll via Visual Studio.</releaseNotes>
     <copyright>Copyright 2012</copyright>
     <tags>Automata, Search</tags>
-    <file src="SearchAlgorithms\bin\Release\*.dll" target="lib" />
   </metadata>
+  <files>
+    <file src="SearchAlgorithms\bin\Release\*.dll" target="lib" />
+  </files>
 </package>
