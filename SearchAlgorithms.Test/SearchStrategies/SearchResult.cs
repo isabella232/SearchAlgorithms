@@ -2,15 +2,11 @@
 {
     public class SearchResult
     {
-        public string Id { get; set; }
-        public string Description { get; set; }
-        public string Number { get; set; }
+        public string Name { get; set; }
 
-        public SearchResult(string id, string description, string number)
+        public SearchResult(string name)
         {
-            Id = id;
-            Description = description;
-            Number = number;
+            Name = name;
         }
     }
 }

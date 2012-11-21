@@ -47,7 +47,7 @@ namespace SearchAlgorithms.Test.SearchStrategies
         [Test]
         public void ShouldReturnStringsFromLargeDatasetThatAreEqual()
         {
-            IEnumerable<string> results = _strategy.Search("Will Barken", _largeDataset);
+            IEnumerable<string> results = _strategy.Search("elephant", _largeDataset);
             Assert.AreEqual(1, results.Count());
         }
 
@@ -66,7 +66,7 @@ namespace SearchAlgorithms.Test.SearchStrategies
                         finalResults.Add(item);
             }
 
-            Assert.AreEqual(377, finalResults.Count);
+            Assert.AreEqual(178, finalResults.Count);
         }
 
         private void _SetupDataset()
@@ -101,12 +101,11 @@ namespace SearchAlgorithms.Test.SearchStrategies
             {
                 string line = reader.ReadLine();
                 string[] entries = line.Split(new [] {','}, System.StringSplitOptions.None);
-                SearchResult sr = new SearchResult(entries[0], entries[1], entries[2]);
+                SearchResult sr = new SearchResult(entries[0]);
                 searchResults.Add(sr);
             }
 
-            _largeDataset.AddRange(searchResults.Where(x => !string.IsNullOrEmpty(x.Description)).Select(x => x.Description));
-            _largeDataset.AddRange(searchResults.Where(x => !string.IsNullOrEmpty(x.Number)).Select(x => x.Number));
+            _largeDataset.AddRange(searchResults.Where(x => !string.IsNullOrEmpty(x.Name)).Select(x => x.Name));
             List<string> intermediateDataSet = new List<string>();
             intermediateDataSet.AddRange(_largeDataset.SelectMany(x => x.Split(new[] {' '})));
 
