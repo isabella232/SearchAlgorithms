@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using NUnit.Framework;
 using SearchAlgorithms.StringStrategies;
 
@@ -56,7 +57,16 @@ namespace SearchAlgorithms.Test.SearchStrategies
             string[] dataset = new string[_sortedDataSet.Count];
             _sortedDataSet.Values.CopyTo(dataset, 0);
             IEnumerable<string> results = _strategy.Search("Randy".ToLower(), dataset.ToList(), 1);
-            Assert.AreEqual(10, results.Count());
+
+            List<string> finalResults = new List<string>();
+            foreach (string item in _largeDataset)
+            {
+                foreach (string result in results)
+                    if (item.ToLower().Contains(result))
+                        finalResults.Add(item);
+            }
+
+            Assert.AreEqual(377, finalResults.Count);
         }
 
         private void _SetupDataset()
@@ -102,7 +112,7 @@ namespace SearchAlgorithms.Test.SearchStrategies
 
             _sortedDataSet = new SortedList(
                 intermediateDataSet.Where(x => !string.IsNullOrWhiteSpace(x)).
-                                    Select(x => x.ToLower().Replace(" ", "").Replace("'","").Trim()).
+                                    Select(x => x.ToLower().Trim()).
                                     Distinct().
                                     ToDictionary(str => str));
         }

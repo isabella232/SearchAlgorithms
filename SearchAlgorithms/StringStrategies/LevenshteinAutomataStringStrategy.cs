@@ -38,6 +38,9 @@ namespace SearchAlgorithms.StringStrategies
                 if (next.Contains(match))
                     matches.Add(next);
 
+                if (index >= dataset.Count)
+                    break;
+
                 next = dataset[index];
                 match = levenshteinAutomata.FindNextValidString(next);
             }
