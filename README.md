@@ -130,3 +130,7 @@ namespace SearchAlgorithms.Test.SearchStrategies
     }
 }
 ````
+
+## License
+
+This code is released under the [MIT license](http://opensource.org/licenses/MIT) with no guarantees.
