@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using NUnit.Framework;
 using SearchAlgorithms.StringStrategies;
 
@@ -33,14 +32,14 @@ namespace SearchAlgorithms.Test.SearchStrategies
         [Test]
         public void ShouldReturnStringsThatAreOnlyOffByAtMostOneCharacter()
         {
-            IEnumerable<string> results = _strategy.Search("nice", _dataset, 1);
+            IEnumerable<string> results = _strategy.Search("nice", _dataset.OrderBy(x => x).ToList(), 1);
             Assert.AreEqual(3, results.Count());
         }
 
         [Test]
         public void ShouldReturnStringsThatAreOnlyOffByAtMostTwoCharacters()
         {
-            IEnumerable<string> results = _strategy.Search("nice", _dataset, 2);
+            IEnumerable<string> results = _strategy.Search("nice", _dataset.OrderBy(x => x).ToList(), 2);
             Assert.AreEqual(5, results.Count());
         }
 
@@ -66,7 +65,7 @@ namespace SearchAlgorithms.Test.SearchStrategies
                         finalResults.Add(item);
             }
 
-            Assert.AreEqual(178, finalResults.Count);
+            Assert.AreEqual(527, finalResults.Count);
         }
 
         private void _SetupDataset()

@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using SearchAlgorithms.Automata;
 
 namespace SearchAlgorithms.StringStrategies
@@ -26,6 +24,7 @@ namespace SearchAlgorithms.StringStrategies
 
             Dfa levenshteinAutomata = _LevenshteinAutomata(query, fuzziness);
             string match = levenshteinAutomata.FindNextValidString("\u0001");
+            string prevLookup = "";
 
             while (match != null)
             {
@@ -34,15 +33,24 @@ namespace SearchAlgorithms.StringStrategies
                     break;
 
                 int index = dataset.IndexOf(next);
-                dataset.RemoveAt(index);
                 if (next.Contains(match))
+                {
                     matches.Add(next);
+                    dataset.RemoveAt(index);
+                    next = dataset[index];
+                }
+
+                else if (next == prevLookup)
+                {
+                    dataset.RemoveAt(index);
+                    next = dataset[index];
+                }
+
+                prevLookup = next;
+                match = levenshteinAutomata.FindNextValidString(next);
 
                 if (index >= dataset.Count)
                     break;
-
-                next = dataset[index];
-                match = levenshteinAutomata.FindNextValidString(next);
             }
 
             return matches;

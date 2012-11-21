@@ -97,7 +97,6 @@ namespace SearchAlgorithms.Automata
             AutomataState state = _startState;
             Stack<Tuple<string, AutomataState, char>> stack = new Stack<Tuple<string, AutomataState, char>>();
             int i = 0;
-            //bool aStateWasNotFound = false;
 
             foreach (char c in input)
             {
@@ -105,16 +104,9 @@ namespace SearchAlgorithms.Automata
                 state = _FindNextState(state, c);
 
                 if (state == null)
-                {
-                 //   aStateWasNotFound = true;
                     break;
-                }
-
                 i++;
             }
-
-            //if (aStateWasNotFound)
-                //stack.Push(Tuple.Create(input.Substring(0, i+1), state, '\0'));
 
             if (_IsFinal(state))
                 return input;
