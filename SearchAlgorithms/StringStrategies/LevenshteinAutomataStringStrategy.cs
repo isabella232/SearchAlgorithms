@@ -33,6 +33,7 @@ namespace SearchAlgorithms.StringStrategies
                     break;
 
                 int index = dataset.IndexOf(next);
+                int indexPrevLookup = dataset.IndexOf(prevLookup);
                 if (next.Contains(match))
                 {
                     matches.Add(next);
@@ -46,6 +47,8 @@ namespace SearchAlgorithms.StringStrategies
                     next = dataset[index];
                 }
 
+                if (indexPrevLookup >= 0 && indexPrevLookup < dataset.Count)
+                    dataset.RemoveAt(indexPrevLookup);
                 prevLookup = next;
                 match = levenshteinAutomata.FindNextValidString(next);
 

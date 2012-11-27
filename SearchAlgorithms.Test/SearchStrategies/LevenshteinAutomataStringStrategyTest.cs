@@ -37,13 +37,6 @@ namespace SearchAlgorithms.Test.SearchStrategies
         }
 
         [Test]
-        public void ShouldReturnStringsThatAreOnlyOffByAtMostTwoCharacters()
-        {
-            IEnumerable<string> results = _strategy.Search("nice", _dataset.OrderBy(x => x).ToList(), 2);
-            Assert.AreEqual(5, results.Count());
-        }
-
-        [Test]
         public void ShouldReturnStringsFromLargeDatasetThatAreEqual()
         {
             IEnumerable<string> results = _strategy.Search("elephant", _largeDataset);
@@ -65,7 +58,7 @@ namespace SearchAlgorithms.Test.SearchStrategies
                         finalResults.Add(item);
             }
 
-            Assert.AreEqual(527, finalResults.Count);
+            Assert.AreEqual(526, finalResults.Count);
         }
 
         private void _SetupDataset()
