@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>SearchAlgorithms.dll</id>
+    <id>SearchAlgorithms</id>
     <version>1.0.0</version>
     <authors>Eric LaForce</authors>
     <owners>Skookum Digital Works</owners>
